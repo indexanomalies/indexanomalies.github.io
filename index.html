@@ -53,7 +53,7 @@
 <body class="crt min-h-screen flex flex-col justify-between p-4 md:p-8">
 
     <!-- Top Status Bar -->
-    <header class="border-b border-[#00ff66]/30 pb-4 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center text-xs tracking-wider">
+    <header class="border-b border-[#00ff66]/30 pb-4 mb-6 flex flex-col md:flex-row justify-between items-start md:items-center text-xs tracking-wider">
         <div class="flex items-center space-x-2 mb-2 md:mb-0">
             <span class="inline-block w-2 h-2 rounded-full bg-[#00ff66] animate-pulse"></span>
             <span class="font-bold glow-text">INDEXANOMALIES.ORG</span>
@@ -67,9 +67,9 @@
     </header>
 
     <!-- Main Container -->
-    <main class="flex-1 flex flex-col max-w-4xl mx-auto w-full space-y-6 my-2">
+    <main class="flex-1 flex flex-col max-w-4xl mx-auto w-full space-y-8 my-2">
         
-        <!-- Instant Visibility Section -->
+        <!-- Mission Statement -->
         <div class="space-y-4 text-sm leading-relaxed border border-[#00ff66]/20 bg-[#00ff66]/[0.02] p-6">
             <div>
                 <p class="dim-text text-xs mb-1">&gt;&gt; PUBLIC_RECORD // ESTABLISHED ARCHIVE</p>
@@ -79,125 +79,51 @@
             <p class="text-gray-300">
                 For years, we have maintained a public record of exceptional artists who choose to operate under pseudonyms. The world knows their creations, but their true identities remain protected. We catalog and present these undercover creators who have remained anonymous to this day—delivering uncompromised art directly to communities without a face or a brand attached.
             </p>
+        </div>
 
-            <div class="border-t border-[#00ff66]/20 pt-4 space-y-2">
-                <p class="text-xs font-bold glow-text">OUR STANCE:</p>
-                <p class="text-gray-300 text-xs leading-relaxed">
-                    Art shouldn't need a public persona or marketing hype to matter. By keeping this domain completely sterile—free of ads, cookies, and tracking scripts—we provide a secure, independent space where public archival work can exist purely on its own merit. No algorithms. Just pure art from ghosts.
+        <!-- Featured Artist Entry: Herida -->
+        <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                <div>
+                    <span class="text-xs dim-text">&gt;&gt; FEATURED RECORD [001]</span>
+                    <h2 class="text-xl md:text-2xl font-bold glow-text tracking-wide">HERIDA</h2>
+                </div>
+                <div class="text-xs dim-text mt-2 md:mt-0">
+                    <span>MEDIUM: PAINTING</span> // <span>STATUS: ARCHIVED</span>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                <p>
+                    Herida started painting long after marriage, settling into the work at a stage in life where most people are slowing down.
+                </p>
+                <p>
+                    You won't find a conventional biography, an artist statement, or a photograph of her standing next to a canvas. Her pieces circulate through community exhibitions and private collections quietly, sold strictly on the strength of the work itself.
+                </p>
+                <p>
+                    Among those who follow her output over the years, a running assumption has formed that she must be quite elderly now. The lines in her recent paintings are no longer rigid or straight; they carry a distinct, trembling weight—the unedited geometry of aging hands translating decades of observation onto canvas.
+                </p>
+                <p class="text-gray-200 font-medium">
+                    Herida has never corrected the assumption, nor has she offered an explanation. She simply paints, leaves the personal history out of the frame, and lets the work age at its own pace.
                 </p>
             </div>
-        </div>
-
-        <!-- Interactive Terminal Log Area -->
-        <div class="flex-1 space-y-3 text-sm">
-            <div class="text-xs text-gray-400">
-                <span>&gt; Terminal interactive layer active. Type </span>
-                <code class="text-[#00ff66]">artists</code>, 
-                <code class="text-[#00ff66]">status</code>, or 
-                <code class="text-[#00ff66]">help</code> to explore further.
-            </div>
-            
-            <div id="terminal-output" class="space-y-2 max-h-[30vh] overflow-y-auto pr-2">
-                <!-- Dynamic output populates here -->
-            </div>
-        </div>
-
-        <!-- Input Prompt Form -->
-        <form id="terminal-form" class="flex items-center space-x-2 border-t border-[#00ff66]/30 pt-4">
-            <span class="glow-text font-bold">&gt;</span>
-            <input 
-                type="text" 
-                id="terminal-input" 
-                autocomplete="off" 
-                placeholder="type a command (optional)..."
-                class="flex-1 bg-transparent border-none outline-none text-[#00ff66] font-mono text-sm placeholder:text-[#008833]/50"
-            >
-            <button type="submit" class="text-xs border border-[#00ff66]/40 px-3 py-1 hover:bg-[#00ff66] hover:text-black transition-colors">
-                EXECUTE
-            </button>
-        </form>
+        </section>
 
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-[#00ff66]/20 pt-4 mt-6 text-center text-xs dim-text">
+    <footer class="border-t border-[#00ff66]/20 pt-4 mt-12 text-center text-xs dim-text">
         <p>&copy; IndexAnomalies.org // Public Registry &middot; Established Archive &middot; Immutable</p>
     </footer>
 
-    <!-- Terminal Logic Script -->
+    <!-- Live UTC Clock Script -->
     <script>
-        // Live UTC Clock
         function updateClock() {
             const now = new Date();
             document.getElementById('utc-clock').textContent = now.toUTCString().slice(17, 25) + " UTC";
         }
         setInterval(updateClock, 1000);
         updateClock();
-
-        // Terminal Command Processor
-        const form = document.getElementById('terminal-form');
-        const input = document.getElementById('terminal-input');
-        const output = document.getElementById('terminal-output');
-
-        const responses = {
-            "help": `
-                <div class="space-y-1 text-xs text-gray-300">
-                    <p class="glow-text font-bold">AVAILABLE COMMANDS DIRECTORY:</p>
-                    <p><span class="text-white font-bold">artists</span> - View criteria for cataloged pseudonymous creators.</p>
-                    <p><span class="text-white font-bold">status</span> - Verify node security and zero-tracker status.</p>
-                    <p><span class="text-white font-bold">clear</span> - Purge terminal output buffer.</p>
-                </div>
-            `,
-            "artists": `
-                <div class="space-y-1 text-xs text-gray-300">
-                    <p class="glow-text font-bold">&gt; PSEUDONYMOUS REGISTRY CRITERIA</p>
-                    <p>[001] Verified absolute anonymity / zero public identity exposure.</p>
-                    <p>[002] Public works contributed directly to community archives over time.</p>
-                    <p>[003] Immune to commercial art market pressures and hype cycles.</p>
-                </div>
-            `,
-            "status": `
-                <div class="space-y-1 text-xs text-gray-300">
-                    <p class="glow-text font-bold">&gt; SYSTEM STATUS REPORT</p>
-                    <p>Hosting: GitHub Pages (Isolated CDN)</p>
-                    <p>DNS Routing: Secure ALIAS / CNAME Verified</p>
-                    <p>SSL Certificate: Active (TLS 1.3)</p>
-                    <p>Tracking Scripts: 0 detected (100% Sterile)</p>
-                </div>
-            `
-        };
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const cmd = input.value.trim().toLowerCase();
-            if (!cmd) return;
-
-            // Echo command
-            const userEcho = document.createElement('div');
-            userEcho.className = "text-gray-400 text-xs";
-            userEcho.innerHTML = `&gt; ${escapeHtml(input.value)}`;
-            output.appendChild(userEcho);
-
-            // Process command
-            const resultDiv = document.createElement('div');
-            if (cmd === 'clear') {
-                output.innerHTML = '';
-            } else if (responses[cmd]) {
-                resultDiv.innerHTML = responses[cmd];
-                output.appendChild(resultDiv);
-            } else {
-                resultDiv.className = "text-red-400 text-xs";
-                resultDiv.innerHTML = `[-] Command not recognized: '${escapeHtml(cmd)}'. Type 'help' for valid directives.`;
-                output.appendChild(resultDiv);
-            }
-
-            input.value = '';
-            output.scrollTop = output.scrollHeight;
-        });
-
-        function escapeHtml(str) {
-            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        }
     </script>
 </body>
 </html>
