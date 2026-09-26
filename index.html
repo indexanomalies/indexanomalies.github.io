@@ -3,132 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Anomalies [Registry]</title>
+    <title>Index Anomalies // Forensic Registry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+        
         body {
-            background-color: #000000;
-            color: #d1d1d1;
-            font-family: "Courier New", Courier, monospace;
-            font-size: 14px;
-            line-height: 1.6;
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #030303;
+            color: #00ff66;
             margin: 0;
-            padding: 40px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        header {
-            border-bottom: 1px solid #333333;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        h1 {
-            font-size: 14px;
-            font-weight: normal;
-            letter-spacing: 2px;
-            margin: 0;
-            color: #ffffff;
-        }
-        .meta-block {
-            color: #666666;
-            font-size: 12px;
-            margin-bottom: 40px;
-        }
-        .registry-list {
-            list-style: none;
             padding: 0;
-            margin: 0;
+            overflow-x: hidden;
         }
-        .registry-item {
-            padding: 12px 0;
-            border-bottom: 1px solid #1a1a1a;
-            display: flex;
-            justify-content: space-between;
+
+        /* CRT Scanline overlay */
+        .crt::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
         }
-        .entry-id {
-            color: #ffffff;
+
+        /* Custom scrollbar for terminal */
+        ::-webkit-scrollbar {
+            width: 6px;
         }
-        .entry-status {
-            color: #666666;
+        ::-webkit-scrollbar-track {
+            background: #030303;
         }
-        footer {
-            margin-top: 60px;
-            font-size: 11px;
-            color: #444444;
-            border-top: 1px solid #1a1a1a;
-            padding-top: 20px;
+        ::-webkit-scrollbar-thumb {
+            background: #00ff66;
+            border-radius: 2px;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+        }
+
+        .dim-text {
+            color: #008833;
         }
     </style>
 </head>
-<body>
+<body class="crt min-h-screen flex flex-col justify-between p-4 md:p-8">
 
-<div class="container">
-    <header>
-        <h1>INDEX ANOMALIES // FORENSIC REGISTRY</h1>
+    <!-- Top Status Bar -->
+    <header class="border-b border-[#00ff66]/30 pb-4 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center text-xs tracking-wider">
+        <div class="flex items-center space-x-2 mb-2 md:mb-0">
+            <span class="inline-block w-2 h-2 rounded-full bg-[#00ff66] animate-pulse"></span>
+            <span class="font-bold glow-text">INDEXANOMALIES.ORG</span>
+            <span class="dim-text">// SECURE_REGISTRY_v1.0</span>
+        </div>
+        <div class="dim-text flex space-x-4">
+            <span>SYS_TIME: <span id="utc-clock">00:00:00 UTC</span></span>
+            <span>ENCRYPTION: RSA-4096</span>
+            <span>TRACKERS: 0</span>
+        </div>
     </header>
 
-    <div class="meta-block">
-        [STATUS: ACTIVE SYSTEM]<br>
-        [TOTAL ENTRIES: 01 / 12]<br>
-        [CONTACT: bureau@indexanomalies.org]
-    </div>
+    <!-- Main Terminal Window -->
+    <main class="flex-1 flex flex-col max-w-5xl mx-auto w-full space-y-4">
+        
+        <!-- Static Welcome Block -->
+        <div class="space-y-2 text-sm leading-relaxed">
+            <p class="dim-text">[+] Initializing secure enclave...</p>
+            <p class="dim-text">[+] Bypassing commercial telemetry layers... OK</p>
+            <p class="glow-text font-bold">&gt; SYSTEM READY. AUTONOMOUS FORENSIC INTERFACE ONLINE.</p>
+            <p class="text-gray-300 text-xs mt-2">
+                Welcome to Index Anomalies. This node operates independently as a sterile registry for unmapped data structures, archival analysis, and systemic discrepancies.
+            </p>
+        </div>
 
-    <ul class="registry-list">
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_09 [9fingers]</span>
-            <span class="entry-status">LOGGED // SECURED</span>
-        </li>
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_02</span>
-            <span class="entry-status">PENDING_ALLOCATION</span>
-        </li>
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_03</span>
-            <span class="entry-status">PENDING_ALLOCATION</span>
-        </li>
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_04</span>
-            <span class="entry-status">PENDING_ALLOCATION</span>
-        </li>
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_05</span>
-            <span class="entry-status">PENDING_ALLOCATION</span>
-        </li>
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_06</span>
-            <span class="entry-status">PENDING_ALLOCATION</span>
-        </li>
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_07</span>
-            <span class="entry-status">PENDING_ALLOCATION</span>
-        </li>
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_08</span>
-            <span class="entry-status">PENDING_ALLOCATION</span>
-        </li>
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_01</span>
-            <span class="entry-status">PENDING_ALLOCATION</span>
-        </li>
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_10</span>
-            <span class="entry-status">PENDING_ALLOCATION</span>
-        </li>
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_11</span>
-            <span class="entry-status">PENDING_ALLOCATION</span>
-        </li>
-        <li class="registry-item">
-            <span class="entry-id">ENTRY_12</span>
-            <span class="entry-id entry-status">PENDING_ALLOCATION</span>
-        </li>
-    </ul>
+        <!-- Help Hint -->
+        <div class="border border-[#00ff66]/20 bg-[#00ff66]/5 p-3 text-xs text-gray-300">
+            <span class="glow-text font-bold">AVAILABLE COMMANDS:</span> 
+            <code class="text-[#00ff66] ml-2">help</code>, 
+            <code class="text-[#00ff66] ml-2">manifesto</code>, 
+            <code class="text-[#00ff66] ml-2">registry</code>, 
+            <code class="text-[#00ff66] ml-2">status</code>, 
+            <code class="text-[#00ff66] ml-2">clear</code>
+        </div>
 
-    <footer>
-        AUTONOMOUS STRUCTURAL FIREWALL. NO COMMERCIAL SIGNALS ACCEPTED.
+        <!-- Terminal Output Log -->
+        <div id="terminal-output" class="flex-1 space-y-3 text-sm my-4 overflow-y-auto max-h-[50vh] pr-2">
+            <!-- Dynamic output populates here -->
+        </div>
+
+        <!-- Input Prompt Form -->
+        <form id="terminal-form" class="flex items-center space-x-2 border-t border-[#00ff66]/30 pt-4">
+            <span class="glow-text font-bold">&gt;</span>
+            <input 
+                type="text" 
+                id="terminal-input" 
+                autocomplete="off" 
+                autofocus
+                placeholder="type command here (e.g. 'help')..."
+                class="flex-1 bg-transparent border-none outline-none text-[#00ff66] font-mono text-sm placeholder:text-[#008833]/50"
+            >
+            <button type="submit" class="text-xs border border-[#00ff66]/40 px-3 py-1 hover:bg-[#00ff66] hover:text-black transition-colors">
+                EXECUTE
+            </button>
+        </form>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#00ff66]/20 pt-4 mt-6 text-center text-xs dim-text">
+        <p>&copy; IndexAnomalies.org // Autonomous &middot; Sterile &middot; Immutable</p>
     </footer>
-</div>
 
+    <!-- Terminal Logic Script -->
+    <script>
+        // Live UTC Clock
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('utc-clock').textContent = now.toUTCString().slice(17, 25) + " UTC";
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Terminal Command Processor
+        const form = document.getElementById('terminal-form');
+        const input = document.getElementById('terminal-input');
+        const output = document.getElementById('terminal-output');
+
+        const responses = {
+            "help": `
+                <div class="space-y-1 text-xs">
+                    <p class="glow-text font-bold">AVAILABLE COMMANDS DIRECTORY:</p>
+                    <p><span class="text-white font-bold">manifesto</span> - Display core operational doctrine.</p>
+                    <p><span class="text-white font-bold">registry</span> - View active anomaly categories and nodes.</p>
+                    <p><span class="text-white font-bold">status</span> - Verify node integrity and security parameters.</p>
+                    <p><span class="text-white font-bold">clear</span> - Purge terminal output buffer.</p>
+                </div>
+            `,
+            "manifesto": `
+                <div class="space-y-1 text-xs text-gray-300">
+                    <p class="glow-text font-bold">&gt; MANIFESTO // INDEX ANOMALIES</p>
+                    <p>1. Absolute independence from commercial surveillance and metrics.</p>
+                    <p>2. Preservation of raw data without atmospheric noise or visual clutter.</p>
+                    <p>3. Uncompromised forensic integrity across all decentralized nodes.</p>
+                </div>
+            `,
+            "registry": `
+                <div class="space-y-1 text-xs text-gray-300">
+                    <p class="glow-text font-bold">&gt; ACTIVE REGISTRY INDEX</p>
+                    <p>[001] STRUCTURAL_ANOMALIES // Monitored</p>
+                    <p>[002] ISOLATED_ARCHIVES // Encrypted</p>
+                    <p>[003] TELEMETRY_VOID // Verified Clean</p>
+                </div>
+            `,
+            "status": `
+                <div class="space-y-1 text-xs text-gray-300">
+                    <p class="glow-text font-bold">&gt; SYSTEM STATUS REPORT</p>
+                    <p>Hosting: GitHub Pages (Isolated CDN)</p>
+                    <p>DNS Routing: Secure ALIAS / CNAME Verified</p>
+                    <p>SSL Certificate: Active (TLS 1.3)</p>
+                    <p>Tracking Scripts: 0 detected (100% Sterile)</p>
+                </div>
+            `
+        };
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const cmd = input.value.trim().toLowerCase();
+            if (!cmd) return;
+
+            // Echo command
+            const userEcho = document.createElement('div');
+            userEcho.className = "text-gray-400 text-xs";
+            userEcho.innerHTML = `&gt; ${escapeHtml(input.value)}`;
+            output.appendChild(userEcho);
+
+            // Process command
+            const resultDiv = document.createElement('div');
+            if (cmd === 'clear') {
+                output.innerHTML = '';
+            } else if (responses[cmd]) {
+                resultDiv.innerHTML = responses[cmd];
+                output.appendChild(resultDiv);
+            } else {
+                resultDiv.className = "text-red-400 text-xs";
+                resultDiv.innerHTML = `[-] Command not recognized: '${escapeHtml(cmd)}'. Type 'help' for valid directives.`;
+                output.appendChild(resultDiv);
+            }
+
+            input.value = '';
+            output.scrollTop = output.scrollHeight;
+        });
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+    </script>
 </body>
 </html>
