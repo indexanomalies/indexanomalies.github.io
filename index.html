@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Anomalies // Forensic Registry</title>
+    <title>Index Anomalies // Registry of Pseudonymous Artists</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
@@ -57,7 +57,7 @@
         <div class="flex items-center space-x-2 mb-2 md:mb-0">
             <span class="inline-block w-2 h-2 rounded-full bg-[#00ff66] animate-pulse"></span>
             <span class="font-bold glow-text">INDEXANOMALIES.ORG</span>
-            <span class="dim-text">// SECURE_REGISTRY_v1.0</span>
+            <span class="dim-text">// PSEUDONYMOUS_ART_VAULT</span>
         </div>
         <div class="dim-text flex space-x-4">
             <span>SYS_TIME: <span id="utc-clock">00:00:00 UTC</span></span>
@@ -69,21 +69,21 @@
     <!-- Main Container -->
     <main class="flex-1 flex flex-col max-w-4xl mx-auto w-full space-y-6 my-2">
         
-        <!-- Instant Visibility Section (No typing required) -->
+        <!-- Instant Visibility Section (Clear English) -->
         <div class="space-y-4 text-sm leading-relaxed border border-[#00ff66]/20 bg-[#00ff66]/[0.02] p-6">
             <div>
-                <p class="dim-text text-xs mb-1">&gt;&gt; SYSTEM_TRANSMISSION // INITIALIZE</p>
-                <h1 class="text-lg md:text-xl font-bold glow-text">Index Anomalies is an autonomous, independent digital registry built out of exhaustion with the modern web.</h1>
+                <p class="dim-text text-xs mb-1">&gt;&gt; ARCHIVAL_MISSION // UNDERCOVER CREATORS</p>
+                <h1 class="text-lg md:text-xl font-bold glow-text">Index Anomalies is a digital vault dedicated to anonymous and pseudonymous masters.</h1>
             </div>
 
             <p class="text-gray-300">
-                Everywhere you look, websites are bloated with tracking scripts, behavioral analytics, cookie banners, and visual noise designed purely to capture and sell attention. We built this space to be the exact opposite: completely autonomous, entirely sterile, and stripped of everything non-essential. It's a quiet room on a very loud internet.
+                Across the world, exceptional artists have chosen pseudonyms, operating entirely under the radar to protect their craft from commercial exploitation, politics, and the trap of modern fame. We hunt down, verify, and catalog the finest undercover creators who have remained anonymous to this day—delivering uncompromised art directly to communities without a face or a brand attached.
             </p>
 
             <div class="border-t border-[#00ff66]/20 pt-4 space-y-2">
-                <p class="text-xs font-bold glow-text">WHAT WE PROVIDE & WHY:</p>
+                <p class="text-xs font-bold glow-text">WHY WE EXIST:</p>
                 <p class="text-gray-300 text-xs leading-relaxed">
-                    We provide a clean, forensic digital registry for unmapped data and independent archival work. We do this because the internet was originally meant to be a decentralized network of independent nodes, not a walled garden governed by algorithms. By keeping this domain strictly independent—hosted on secure infrastructure with zero trackers—we offer a proof-of-concept that you can publish on the web without compromising your data or your visitors' privacy.
+                    Art shouldn't need a marketing budget or a public persona to matter. By keeping this domain completely sterile—free of ads, cookies, and tracking scripts—we provide a secure, independent space where underground work can exist purely on its own merit. No algorithms. Just pure art from ghosts.
                 </p>
             </div>
         </div>
@@ -92,9 +92,9 @@
         <div class="flex-1 space-y-3 text-sm">
             <div class="text-xs text-gray-400">
                 <span>&gt; Terminal interactive layer active. Type </span>
-                <code class="text-[#00ff66]">registry</code>, 
+                <code class="text-[#00ff66]">artists</code>, 
                 <code class="text-[#00ff66]">status</code>, or 
-                <code class="text-[#00ff66]">help</code> if you wish to query further.
+                <code class="text-[#00ff66]">help</code> to explore further.
             </div>
             
             <div id="terminal-output" class="space-y-2 max-h-[30vh] overflow-y-auto pr-2">
@@ -121,7 +121,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-[#00ff66]/20 pt-4 mt-6 text-center text-xs dim-text">
-        <p>&copy; IndexAnomalies.org // Autonomous &middot; Sterile &middot; Immutable</p>
+        <p>&copy; IndexAnomalies.org // Autonomous &middot; Anonymous &middot; Immutable</p>
     </footer>
 
     <!-- Terminal Logic Script -->
@@ -143,17 +143,17 @@
             "help": `
                 <div class="space-y-1 text-xs text-gray-300">
                     <p class="glow-text font-bold">AVAILABLE COMMANDS DIRECTORY:</p>
-                    <p><span class="text-white font-bold">registry</span> - View active anomaly categories and nodes.</p>
-                    <p><span class="text-white font-bold">status</span> - Verify node integrity and security parameters.</p>
+                    <p><span class="text-white font-bold">artists</span> - View criteria for cataloged pseudonymous creators.</p>
+                    <p><span class="text-white font-bold">status</span> - Verify node security and zero-tracker status.</p>
                     <p><span class="text-white font-bold">clear</span> - Purge terminal output buffer.</p>
                 </div>
             `,
-            "registry": `
+            "artists": `
                 <div class="space-y-1 text-xs text-gray-300">
-                    <p class="glow-text font-bold">&gt; ACTIVE REGISTRY INDEX</p>
-                    <p>[001] STRUCTURAL_ANOMALIES // Monitored</p>
-                    <p>[002] ISOLATED_ARCHIVES // Encrypted</p>
-                    <p>[003] TELEMETRY_VOID // Verified Clean</p>
+                    <p class="glow-text font-bold">&gt; PSEUDONYMOUS REGISTRY CRITERIA</p>
+                    <p>[001] Verified absolute anonymity / zero public identity exposure.</p>
+                    <p>[002] Independent works contributed directly to community archives.</p>
+                    <p>[003] Immune to commercial art market pressures and hype cycles.</p>
                 </div>
             `,
             "status": `
