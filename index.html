@@ -29,7 +29,7 @@
             pointer-events: none;
         }
 
-        /* Custom scrollbar for terminal */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -66,32 +66,40 @@
         </div>
     </header>
 
-    <!-- Main Terminal Window -->
-    <main class="flex-1 flex flex-col max-w-5xl mx-auto w-full space-y-4">
+    <!-- Main Container -->
+    <main class="flex-1 flex flex-col max-w-4xl mx-auto w-full space-y-6 my-2">
         
-        <!-- Static Welcome Block -->
-        <div class="space-y-2 text-sm leading-relaxed">
-            <p class="dim-text">[+] Initializing secure enclave...</p>
-            <p class="dim-text">[+] Bypassing commercial telemetry layers... OK</p>
-            <p class="glow-text font-bold">&gt; SYSTEM READY. AUTONOMOUS FORENSIC INTERFACE ONLINE.</p>
-            <p class="text-gray-300 text-xs mt-2">
-                Welcome to Index Anomalies. This node operates independently as a sterile registry for unmapped data structures, archival analysis, and systemic discrepancies.
+        <!-- Instant Visibility Section (No typing required) -->
+        <div class="space-y-4 text-sm leading-relaxed border border-[#00ff66]/20 bg-[#00ff66]/[0.02] p-6">
+            <div>
+                <p class="dim-text text-xs mb-1">&gt;&gt; SYSTEM_TRANSMISSION // INITIALIZE</p>
+                <h1 class="text-lg md:text-xl font-bold glow-text">Index Anomalies is an autonomous, independent digital registry built out of exhaustion with the modern web.</h1>
+            </div>
+
+            <p class="text-gray-300">
+                Everywhere you look, websites are bloated with tracking scripts, behavioral analytics, cookie banners, and visual noise designed purely to capture and sell attention. We built this space to be the exact opposite: completely autonomous, entirely sterile, and stripped of everything non-essential. It's a quiet room on a very loud internet.
             </p>
+
+            <div class="border-t border-[#00ff66]/20 pt-4 space-y-2">
+                <p class="text-xs font-bold glow-text">WHAT WE PROVIDE & WHY:</p>
+                <p class="text-gray-300 text-xs leading-relaxed">
+                    We provide a clean, forensic digital registry for unmapped data and independent archival work. We do this because the internet was originally meant to be a decentralized network of independent nodes, not a walled garden governed by algorithms. By keeping this domain strictly independent—hosted on secure infrastructure with zero trackers—we offer a proof-of-concept that you can publish on the web without compromising your data or your visitors' privacy.
+                </p>
+            </div>
         </div>
 
-        <!-- Help Hint -->
-        <div class="border border-[#00ff66]/20 bg-[#00ff66]/5 p-3 text-xs text-gray-300">
-            <span class="glow-text font-bold">AVAILABLE COMMANDS:</span> 
-            <code class="text-[#00ff66] ml-2">help</code>, 
-            <code class="text-[#00ff66] ml-2">manifesto</code>, 
-            <code class="text-[#00ff66] ml-2">registry</code>, 
-            <code class="text-[#00ff66] ml-2">status</code>, 
-            <code class="text-[#00ff66] ml-2">clear</code>
-        </div>
-
-        <!-- Terminal Output Log -->
-        <div id="terminal-output" class="flex-1 space-y-3 text-sm my-4 overflow-y-auto max-h-[50vh] pr-2">
-            <!-- Dynamic output populates here -->
+        <!-- Interactive Terminal Log Area -->
+        <div class="flex-1 space-y-3 text-sm">
+            <div class="text-xs text-gray-400">
+                <span>&gt; Terminal interactive layer active. Type </span>
+                <code class="text-[#00ff66]">registry</code>, 
+                <code class="text-[#00ff66]">status</code>, or 
+                <code class="text-[#00ff66]">help</code> if you wish to query further.
+            </div>
+            
+            <div id="terminal-output" class="space-y-2 max-h-[30vh] overflow-y-auto pr-2">
+                <!-- Dynamic output populates here -->
+            </div>
         </div>
 
         <!-- Input Prompt Form -->
@@ -101,8 +109,7 @@
                 type="text" 
                 id="terminal-input" 
                 autocomplete="off" 
-                autofocus
-                placeholder="type command here (e.g. 'help')..."
+                placeholder="type a command (optional)..."
                 class="flex-1 bg-transparent border-none outline-none text-[#00ff66] font-mono text-sm placeholder:text-[#008833]/50"
             >
             <button type="submit" class="text-xs border border-[#00ff66]/40 px-3 py-1 hover:bg-[#00ff66] hover:text-black transition-colors">
@@ -134,20 +141,11 @@
 
         const responses = {
             "help": `
-                <div class="space-y-1 text-xs">
+                <div class="space-y-1 text-xs text-gray-300">
                     <p class="glow-text font-bold">AVAILABLE COMMANDS DIRECTORY:</p>
-                    <p><span class="text-white font-bold">manifesto</span> - Display core operational doctrine.</p>
                     <p><span class="text-white font-bold">registry</span> - View active anomaly categories and nodes.</p>
                     <p><span class="text-white font-bold">status</span> - Verify node integrity and security parameters.</p>
                     <p><span class="text-white font-bold">clear</span> - Purge terminal output buffer.</p>
-                </div>
-            `,
-            "manifesto": `
-                <div class="space-y-1 text-xs text-gray-300">
-                    <p class="glow-text font-bold">&gt; MANIFESTO // INDEX ANOMALIES</p>
-                    <p>1. Absolute independence from commercial surveillance and metrics.</p>
-                    <p>2. Preservation of raw data without atmospheric noise or visual clutter.</p>
-                    <p>3. Uncompromised forensic integrity across all decentralized nodes.</p>
                 </div>
             `,
             "registry": `
