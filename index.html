@@ -3,303 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Anomalies // Public Registry of Pseudonymous Artists & Archives</title>
-    <meta name="description" content="A public digital vault and registry dedicated to anonymous and pseudonymous masters, featuring archived profiles like 9Fingers, Herida, Vexa, and Yūka.">
-    
-    <!-- Schema.org Structured Data to help Google index the registry -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Index Anomalies",
-      "url": "https://indexanomalies.org",
-      "description": "Public digital vault dedicated to anonymous and pseudonymous masters.",
-      "about": {
-        "@type": "Thing",
-        "name": "Pseudonymous Artists Archive"
-      }
-    }
-    </script>
-
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Index of Anomalies // Public Archival Registry</title>
+    <meta name="description" content="An independent, uncompromised registry of pseudonymous practices, structural inquiries, and non-commercial documentation operating outside conventional institutional frameworks.">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
-        
-        body {
-            font-family: 'JetBrains Mono', monospace;
-            background-color: #030303;
-            color: #00ff66;
+        :root {
+            --bg-color: #0c0c0c;
+            --text-main: #b8b8b8;
+            --text-bright: #e5e5e5;
+            --accent: #ff3333;
+            --border-color: #222222;
+            --card-bg: #121212;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
         }
 
-        /* CRT Scanline overlay */
-        .crt::after {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 999;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #030303;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #00ff66;
-            border-radius: 2px;
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
         }
 
-        .glow-text {
-            text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+        h1 {
+            color: var(--text-bright);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
         }
 
-        .dim-text {
-            color: #008833;
+        .meta-header {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .registry-grid {
+            display: grid;
+            gap: 40px;
+        }
+
+        .artist-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            transition: border-color 0.2s ease;
+        }
+
+        .artist-card:hover {
+            border-color: #333;
+        }
+
+        .artist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .artist-name {
+            color: var(--text-bright);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .artist-meta {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-family: monospace;
+        }
+
+        .artist-body p {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .artist-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+            padding-top: 20px;
+            font-size: 0.75rem;
+            color: #555;
+            text-align: center;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
+            }
+            .artist-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
         }
     </style>
 </head>
-<body class="crt min-h-screen flex flex-col justify-between p-4 md:p-8">
+<body>
 
-    <!-- Top Status Bar -->
-    <header class="border-b border-[#00ff66]/30 pb-4 mb-6 flex flex-col md:flex-row justify-between items-start md:items-center text-xs tracking-wider">
-        <div class="flex items-center space-x-2 mb-2 md:mb-0">
-            <span class="inline-block w-2 h-2 rounded-full bg-[#00ff66] animate-pulse"></span>
-            <span class="font-bold glow-text">INDEXANOMALIES.ORG</span>
-            <span class="dim-text">// PUBLIC_REGISTRY_EST_2016</span>
-        </div>
-        <div class="dim-text flex space-x-4">
-            <span>SYS_TIME: <span id="utc-clock">00:00:00 UTC</span></span>
-            <span>ENCRYPTION: RSA-4096</span>
-            <span>TRACKERS: 0</span>
-        </div>
+    <header>
+        <h1>Index of Anomalies</h1>
+        <div class="meta-header">Public Archival Registry // Unregistered / Pseudonymous Corpus</div>
     </header>
 
-    <!-- Main Container -->
-    <main class="flex-1 flex flex-col max-w-4xl mx-auto w-full space-y-8 my-2">
-        
-        <!-- Mission Statement -->
-        <div class="space-y-4 text-sm leading-relaxed border border-[#00ff66]/20 bg-[#00ff66]/[0.02] p-6">
-            <div>
-                <p class="dim-text text-xs mb-1">&gt;&gt; PUBLIC_RECORD // ESTABLISHED ARCHIVE</p>
-                <h1 class="text-lg md:text-xl font-bold glow-text">Index Anomalies is a public digital vault dedicated to anonymous and pseudonymous masters.</h1>
+    <div class="registry-grid">
+
+        <!-- 01 -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">Herida</h2>
+                <div class="artist-meta">Sculptural Form / Material Archive // Status: Archived</div>
             </div>
-
-            <p class="text-gray-300">
-                For years, we have maintained a public record of exceptional artists who choose to operate under pseudonyms. The world knows their creations, but their true identities remain protected. We catalog and present these undercover creators who have remained anonymous to this day—delivering uncompromised art directly to communities without a face or a brand attached.
-            </p>
-        </div>
-
-        <!-- Artists Registry Section -->
-        <div class="space-y-6">
-            <div class="border-b border-[#00ff66]/30 pb-2">
-                <h2 class="text-xs dim-text tracking-widest">&gt;&gt; ACTIVE REGISTRY ENTRIES [6]</h2>
+            <div class="artist-body">
+                <p>Operating entirely outside conventional institutional channels, Herida constructs physical objects that focus on structural vulnerability, physical weight, and spatial tension. The work avoids standard artistic declarations, prioritizing raw material interaction over personal branding.</p>
+                <p>Within the registry, Herida stands as a foundational record of silent construction—objects engineered to endure without narrative justification or commercial validation.</p>
             </div>
+        </article>
 
-            <!-- Artist Entry: Herida -->
-            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
-                    <div>
-                        <span class="text-xs dim-text">&gt;&gt; RECORD [001]</span>
-                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">HERIDA</h3>
-                    </div>
-                    <div class="text-xs dim-text mt-2 md:mt-0">
-                        <span>MEDIUM: PAINTING</span> // <span>STATUS: ARCHIVED</span>
-                    </div>
-                </div>
+        <!-- 02 -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">Yūka</h2>
+                <div class="artist-meta">Physical Archive / Spatial Geometry // Status: Archived</div>
+            </div>
+            <div class="artist-body">
+                <p>Yūka’s practice is grounded in strict geometric arrangements and material restraint. By stripping away ornamental detail, the work focuses entirely on mass, boundary, and the precise division of architectural environments.</p>
+                <p>Operating without a public biography, the records left by Yūka function as quiet spatial interventions, maintaining a rigid distance from the expectations of the contemporary art market.</p>
+            </div>
+        </article>
 
-                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <p>
-                        Herida started painting long after marriage, settling into the work at a stage in life where most people are slowing down.
-                    </p>
-                    <p>
-                        You won't find a conventional biography, an artist statement, or a photograph of her standing next to a canvas. Her pieces circulate through community exhibitions and private collections quietly, sold strictly on the strength of the work itself.
-                    </p>
-                    <p>
-                        Among those who follow her output over the years, a running assumption has formed that she must be quite elderly now. The lines in her recent paintings are no longer rigid or straight; they carry a distinct, trembling weight—the unedited geometry of aging hands translating decades of observation onto canvas.
-                    </p>
-                    <p class="text-gray-200 font-medium">
-                        Herida has never corrected the assumption, nor has she offered an explanation. She simply paints, leaves the personal history out of the frame, and lets the work age at its own pace.
-                    </p>
-                </div>
-            </section>
+        <!-- 03 -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">Vexa</h2>
+                <div class="artist-meta">Structural Surface / Archival Record // Status: Archived</div>
+            </div>
+            <div class="artist-body">
+                <p>Centering on surface degradation and chemical interaction, Vexa produces physical works that visibly record the passage of time and environmental decay. The processes used are self-governing, relying on natural oxidation rather than direct painterly control.</p>
+                <p>The resulting surfaces function as autonomous logs of physical transformation, requiring no external interpretation or artist commentary to validate their presence.</p>
+            </div>
+        </article>
 
-            <!-- Artist Entry: Yūka -->
-            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
-                    <div>
-                        <span class="text-xs dim-text">&gt;&gt; RECORD [002]</span>
-                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">YŪKA</h3>
-                    </div>
-                    <div class="text-xs dim-text mt-2 md:mt-0">
-                        <span>MEDIUM: MIXED MEDIA / CANVAS</span> // <span>STATUS: ARCHIVED</span>
-                    </div>
-                </div>
+        <!-- 04 -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">Aske</h2>
+                <div class="artist-meta">Monochrome / Material Reduction // Status: Archived</div>
+            </div>
+            <div class="artist-body">
+                <p>Aske employs an extreme reduction of palette and form, constructing objects that test the limits of visual perception within static environments. Every piece rejects narrative symbolism in favor of absolute material presence.</p>
+                <p>Through total anonymity, Aske ensures that the physical work remains unburdened by authorial mythology, presenting a silent barrier against commercial spectacle.</p>
+            </div>
+        </article>
 
-                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <p>
-                        For most of her life, Yūka lived by the metrics of competition. Her days were consumed by training regimens, injuries, victories, and losses. Yet, despite the years of sacrifice, she often felt invisible—persevering through physical and mental strain without ever receiving the recognition she had earned.
-                    </p>
-                    <p>
-                        As time went on, the landscape shifted. People she loved passed away, and the familiar faces of her athletic years faded.
-                    </p>
-                    <p>
-                        Painting began quietly, not as a career pivot or a grand artistic ambition, but as a survival mechanism. It was a private space to process grief, exhaustion, and a lifetime of feeling overlooked. Where sport demanded perfection and public validation, the canvas asked for nothing except honesty.
-                    </p>
-                    <p class="text-gray-200 font-medium">
-                        Through painting, Yūka found a language she was never granted on the podium. She remains outside the art world’s spotlight by choice, letting the work stand as a quiet testament to a person finally speaking on her own terms.
-                    </p>
-                </div>
-            </section>
+        <!-- 05 -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">33467</h2>
+                <div class="artist-meta">Numerical Index / Systematic Archive // Status: Archived</div>
+            </div>
+            <div class="artist-body">
+                <p>Designated purely by a numerical sequence, 33467 operates a practice built upon strict serialization and cataloged repetition. The works record precise intervals, actions, and material metrics without deviation.</p>
+                <p>By replacing a human name with an index number, the practice questions the necessity of personal identity within creative documentation, reducing the creator to an anonymous system administrator.</p>
+            </div>
+        </article>
 
-            <!-- Artist Entry: Vexa -->
-            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
-                    <div>
-                        <span class="text-xs dim-text">&gt;&gt; RECORD [003]</span>
-                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">VEXA</h3>
-                    </div>
-                    <div class="text-xs dim-text mt-2 md:mt-0">
-                        <span>MEDIUM: OIL &amp; MIXED MEDIA</span> // <span>STATUS: ARCHIVED</span>
-                    </div>
-                </div>
+        <!-- 06 (9Fingers safely buried in the exact middle) -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">9Fingers</h2>
+                <div class="artist-meta">Physical Record / Structural Anomaly // Status: Archived</div>
+            </div>
+            <div class="artist-body">
+                <p>Functioning under a strictly enforced numeric pseudonym, 9Fingers maintains a body of physical works created entirely outside standard distribution networks. The practice avoids public appearances, interviews, and gallery affiliation, allowing the physical output to circulate through unmonitored channels.</p>
+                <p>The work focuses on material density and structural irregularity, deliberately bypassing the polished aesthetic expected by contemporary commercial institutions. Within the index, 9Fingers remains an unyielding physical presence—unexplained, unmarketed, and permanently detached from personal biography.</p>
+            </div>
+        </article>
 
-                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <p>
-                        Vexa’s paintings have never been easy to look at. They are disturbing in ways that are difficult to explain. Some are uncomfortable, some almost confrontational, and others leave people with the strange feeling that they have seen something they were never supposed to see. Yet, despite this—or perhaps because of it—the paintings have found their way into the hands of some highly respected collectors.
-                    </p>
-                    <p>
-                        Very little is actually known about the person behind Vexa. The story circulating through private galleries and collectors is that the paintings come directly from a prison. No one seems to know which prison, or even which country. Some claim Vexa is currently incarcerated. Others believe the paintings are being made by someone who was recently released and has chosen to remain hidden. There are even people who insist that Vexa has never been in prison at all, and that the entire story is part of the mystery surrounding the work.
-                    </p>
-                    <p>
-                        Vexa has never appeared publicly to settle any of it. That silence has only made the rumors stronger. According to people who claim to have had some contact with Vexa, the artist refuses to reveal their identity because they believe the paintings would be judged differently if people knew who was making them. The fear isn't that the work would be rejected. It is almost the opposite. The concern is that people might stop seeing the paintings and start seeing the person behind them.
-                    </p>
-                    <p>
-                        Whatever the truth is, the secrecy has created an unusual demand. Paintings are announced, disappear almost immediately, and quietly end up on private waiting lists. Collectors who have already acquired a Vexa reportedly rarely sell. When one does appear on the secondary market, it tends to attract far more attention than anyone expects.
-                    </p>
-                    <p>
-                        And then there is the strangest part. The paintings are posted online as though Vexa is operating from a single, identifiable studio. But the physical works appear to travel through multiple countries before reaching their final destinations. A painting might supposedly leave one continent, be documented somewhere completely different, and then arrive through another country before reaching its collector. Whether this is done deliberately to hide Vexa's location or simply to create the illusion of a hidden network is impossible to say.
-                    </p>
-                    <p class="text-gray-200 font-medium">
-                        There are no reliable photographs of Vexa. No confirmed studio. No public appearances. No conventional interviews. Even the few people who claim to have met the artist disagree about what Vexa is actually like. The only consistent thing is the work. The paintings keep appearing. And every new one seems to create more questions than answers. For now, Vexa remains less of a person in the public imagination and more of a name attached to a growing collection of unsettling paintings—a name whispered between collectors, passed through private conversations, and increasingly difficult to separate from the rumors surrounding it. Perhaps that is exactly how Vexa wants it.
-                    </p>
-                </div>
-            </section>
+        <!-- 07 -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">Leaves</h2>
+                <div class="artist-meta">Wood &amp; Botanical / Public Archive // Status: Archived</div>
+            </div>
+            <div class="artist-body">
+                <p>For decades, the artist known only as Leaves has constructed works that resist conventional categorization, operating entirely outside the traditional art market.</p>
+                <p>The physical objects themselves are built from discarded or structurally damaged wood panels embedded with organic material—specifically leaves gathered quietly across various cities, rural settlements, and distant environments. Rather than serving as mere aesthetic decoration, these botanical elements introduce an archival dimension to the pieces. Specimens gathered from different landscapes reveal distinct variations in form, scale, and texture, functioning as physical records of specific encounters and temporal moments.</p>
+                <p>Leaves has consistently refused conventional gallery representation and public appearances. The anonymity surrounding the work is not deployed as a marketing strategy or an engineered persona, but as a deliberate refusal to let an individual identity overshadow the material record. By choosing to let the work circulate through private, untracked channels without an artist statement or a public biography, Leaves ensures that the focus remains entirely on the objects themselves.</p>
+            </div>
+        </article>
 
-            <!-- Artist Entry: Aske -->
-            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
-                    <div>
-                        <span class="text-xs dim-text">&gt;&gt; RECORD [004]</span>
-                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">ASKE</h3>
-                    </div>
-                    <div class="text-xs dim-text mt-2 md:mt-0">
-                        <span>MEDIUM: PAPER &amp; MIXED MEDIA</span> // <span>STATUS: ARCHIVED</span>
-                    </div>
-                </div>
+        <!-- 08 -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">Blank</h2>
+                <div class="artist-meta">Public Archive / Conceptual Record // Status: Archived</div>
+            </div>
+            <div class="artist-body">
+                <p>Taking its title from the literal condition of an initial surface, Blank is an ongoing conceptual project centered on large sheets of unmarked paper placed quietly within pedestrian spaces. Offered without instructions, ownership, or editorial control, the sheets are left entirely open to whoever happens to encounter them.</p>
+                <p>Over time, these blank surfaces absorb a chaotic cross-section of the public environment: personal notes, fragments of frustration, casual observations, and anonymous expressions. Because no selection process governs the surface, conflicting voices crowd against one another, creating a dense, unfiltered snapshot of collective behavior. Once a sheet reaches full saturation, it is quietly removed and relocated to low-traffic environments, shifting from an invitation for public participation into an object for isolated contemplation.</p>
+                <p>Operating completely outside the commercial art market, Blank maintains total anonymity regarding its instigator. By letting the work function as an unmoderated repository of ordinary human presence, the project avoids institutional ego entirely—standing simply as a persistent archive of what people choose to leave behind when given an empty space.</p>
+            </div>
+        </article>
 
-                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <p>
-                        Aske is an established, highly visible fixture of the Nordic art scene. Most people who buy his primary work have no idea that Aske is a carefully constructed fiction—a second identity built purely to escape the trap of his own success.
-                    </p>
-                    <p>
-                        After decades of living under the microscope of critics, market expectations, and a well-known reputation, he grew exhausted by the fact that every new canvas was instantly decoded through the lens of who he was supposed to be. He wanted to paint without an audience waiting to grade him.
-                    </p>
-                    <p>
-                        Under the name Aske, the pressure vanished, and the work became fun again.
-                    </p>
-                    <p>
-                        To lean into the game, he started hiding small handwritten notes behind the backing paper of his pieces. Naturally, collectors assumed it was a calculated marketing ploy, turning the handwriting into a parlor game of forensic speculation. Aske has never confirmed or denied a single theory.
-                    </p>
-                    <p class="text-gray-200 font-medium">
-                        What began as a simple breathing room from fame evolved into a decades-long quiet joke. He quite enjoys sitting in the living rooms of collectors who obsess over the mystery, entirely unaware that the artist whose identity they are trying to crack is already well-known to them under a different name.
-                    </p>
-                </div>
-            </section>
+        <!-- 09 -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">Noname</h2>
+                <div class="artist-meta">Photography / Spatial Intervention // Status: Archived</div>
+            </div>
+            <div class="artist-body">
+                <p>Operating under a deliberate pseudonym, Noname maintains an ongoing practice focused on institutional critique and the politics of public visibility. Rather than pursuing conventional gallery representation, the work utilizes photographic interventions placed quietly outside traditional exhibition spaces, often integrated into urban and commercial environments without prior authorization.</p>
+                <p>The core of the practice examines how space, access, and cultural recognition are shaped by economic structures and institutional authority. By inserting uncommissioned imagery into heavily controlled public areas, the work introduces a deliberate friction into environments typically dominated by commercial messaging. Anonymity serves as an operational necessity rather than a stylistic choice, allowing the work to exist free from personal biography or market pressures while questioning the mechanisms that determine who is allowed to occupy public visual space.</p>
+            </div>
+        </article>
 
-            <!-- Artist Entry: 33467 -->
-            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
-                    <div>
-                        <span class="text-xs dim-text">&gt;&gt; RECORD [005]</span>
-                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">33467</h3>
-                    </div>
-                    <div class="text-xs dim-text mt-2 md:mt-0">
-                        <span>MEDIUM: PAINTING / SERIALIZED WORK</span> // <span>STATUS: ARCHIVED</span>
-                    </div>
-                </div>
+        <!-- 10 -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">Ipop</h2>
+                <div class="artist-meta">Painting / Conceptual Pop // Status: Archived</div>
+            </div>
+            <div class="artist-body">
+                <p>Operating through a name that wryly subverts the conventions of commercial celebrity, ipop presents a grounded critique of popular culture, shifting its focus entirely away from media icons and toward the anonymous majority. The practice explores the repetitive, unremarked cycles of everyday human existence—treating routine and ordinary behavior as the true baseline of contemporary society.</p>
+                <p>Rather than utilizing digital reproduction or standard gallery distribution channels, ipop’s completed works are known to circulate through unconventional means, occasionally dispatched across borders via prominent human intermediaries whose physical presence adds an intentionally theatrical layer to the transit. Completely detached from conventional marketing campaigns or political agendas, ipop maintains a fatalistic, unsentimental observation of human routine.</p>
+            </div>
+        </article>
 
-                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <p>
-                        Every artwork carries the same signature: 33467. At first, it was simply 33. A few years later, it became 334. Then came the 6, and most recently, the 7. No explanation has ever been offered for the numerical evolution.
-                    </p>
-                    <p>
-                        From the technical structure of the early pieces, it was clear the maker was young—the work held a sharp, playful energy, yet carried an unmistakable sense of premeditation. Each painting read like a continuation of a dialogue started by the last. But as the years passed, an odd anomaly emerged: the work refused to age. The hand remained youthful and crisp, while the signature slowly expanded across time.
-                    </p>
-                    <p>
-                        Distribution follows no conventional commercial logic. 33467 bypasses traditional gallery representation entirely, dispatching works directly to random venues across international capitals. Some curators receive advance notice; others open their shipping crates to discover a painting has arrived unannounced.
-                    </p>
-                    <p>
-                        The pieces are deceptively simple on the surface, but collectors have mapped a hidden continuity: a recurring shape, a specific pigment shift, or a minor motif that resurfaces years later. Viewed individually, they are charming, lightweight objects. Viewed collectively, they reveal a massive, serialized project—a single, sprawling painting being constructed across decades, one discrete canvas at a time.
-                    </p>
-                    <p class="text-gray-200 font-medium">
-                        While the art world attempts to map the identity behind the numbers, 33467 continues to drop the next piece into the mail, keeping an unspoken, private pact with the galleries chosen to carry the weight of the ongoing sequence.
-                    </p>
-                </div>
-            </section>
+        <!-- 11 -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">Gold</h2>
+                <div class="artist-meta">Painting / Monochromic Abstraction // Status: Archived</div>
+            </div>
+            <div class="artist-body">
+                <p>Operating through an intentionally reductive and uncompromising visual vocabulary, Gold centers its entire practice on a single proposition: every work is executed entirely in gold. Bypassing contrasting palettes or complex materials, the practice embraces sameness as a foundational premise, producing a continuum of paintings where individual pieces intentionally blur together.</p>
+                <p>Rather than treating this chromatic restriction as a limitation, the work uses it as a symbolic framework tied to wealth, privilege, and economic power. The sole structural variable introduced across the pieces is directional orientation, positing that subtle shifts in movement can generate profound changes in interpretation. Untouched by conventional gallery ambitions or elaborate artist statements, the work maintains an absolute commitment to its core material manifesto.</p>
+            </div>
+        </article>
 
-            <!-- Artist Entry: 9Fingers -->
-            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
-                    <div>
-                        <span class="text-xs dim-text">&gt;&gt; RECORD [006]</span>
-                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">9FINGERS</h3>
-                    </div>
-                    <div class="text-xs dim-text mt-2 md:mt-0">
-                        <span>MEDIUM: PAINTING</span> // <span>STATUS: ARCHIVED BASELINE</span>
-                    </div>
-                </div>
+        <!-- 12 -->
+        <article class="artist-card">
+            <div class="artist-header">
+                <h2 class="artist-name">Haborym</h2>
+                <div class="artist-meta">Painting / Historical Archive // Status: Archived</div>
+            </div>
+            <div class="artist-body">
+                <p>Operating through an investigation of religious, historical, and mythological traditions, Haborym focuses entirely on the visual recovery of demonic figures drawn from centuries of theological and cultural texts. Bypassing original invention, the practice functions as a visual archive, reconstructing historical entities and returning them to contemporary visibility.</p>
+                <p>Each figure is isolated against a consistent, recurring red background that establishes formal continuity while referencing historical associations with fire and the supernatural. Untethered from commercial promotion or conventional gallery politics, the work approaches these enduring figures as fragments of humanity's long-standing record of fear, belief, and the unknown.</p>
+            </div>
+        </article>
 
-                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <p>
-                        Operating under a pseudonym that first began circulating in art-world circles in New York around 1999, 9Fingers has maintained a strict, multi-decade policy of personal anonymity.
-                    </p>
-                    <p>
-                        According to institutional rumors and critical speculation, the moniker stems from the distinctive physical execution of the canvases—reports suggest the works are created entirely by hand, utilizing a nine-finger manual technique often whispered to be the result of a childhood event.
-                    </p>
-                    <p>
-                        Unlike traditional artists who chase commercial gallery representation or auction house validation, 9Fingers has entirely bypassed the conventional art market. Institutional tracking notes that works under this designation circulate almost exclusively through philanthropic channels: charity auctions, community benefit sales, care centers for the elders, foundations supporting blind children, and epilepsy research initiatives.
-                    </p>
-                    <p class="text-gray-200 font-medium">
-                        By remaining completely detached from commercial galleries and museum circuits, 9Fingers uses anonymity as an operational shield—protecting the interests of collectors while ensuring that the work flows directly into civic and charitable causes unencumbered by market speculation. Within the index, 9Fingers stands as a foundational anomaly: a phantom baseline stretching back over two decades, defined entirely by quiet contribution.
-                    </p>
-                </div>
-            </section>
-        </div>
+    </div>
 
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-[#00ff66]/20 pt-4 mt-12 text-center text-xs dim-text">
-        <p>&copy; IndexAnomalies.org // Public Registry &middot; Established Archive &middot; Immutable</p>
+    <footer>
+        Index of Anomalies &copy; All Rights Reserved // Closed Archival Registry
     </footer>
 
-    <!-- Live UTC Clock Script -->
-    <script>
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('utc-clock').textContent = now.toUTCString().slice(17, 25) + " UTC";
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
 </body>
 </html>
