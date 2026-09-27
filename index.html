@@ -3,290 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index of Anomalies // Public Archival Registry</title>
-    <meta name="description" content="An independent, uncompromised registry of pseudonymous practices, structural inquiries, and non-commercial documentation operating outside conventional institutional frameworks.">
-    <style>
-        :root {
-            --bg-color: #0c0c0c;
-            --text-main: #b8b8b8;
-            --text-bright: #e5e5e5;
-            --accent: #ff3333;
-            --border-color: #222222;
-            --card-bg: #121212;
-        }
+    <title>Index Anomalies // Public Registry of Pseudonymous Artists & Archives</title>
+    <meta name="description" content="A public digital vault and registry dedicated to anonymous and pseudonymous masters, featuring archived profiles like 9Fingers, Herida, Vexa, and Yūka.">
+    
+    <!-- Schema.org Structured Data to help Google index the registry -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Index Anomalies",
+      "url": "https://indexanomalies.org",
+      "description": "Public digital vault dedicated to anonymous and pseudonymous masters.",
+      "about": {
+        "@type": "Thing",
+        "name": "Pseudonymous Artists Archive"
+      }
+    }
+    </script>
 
-        * {
-            box-sizing: border-box;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #030303;
+            color: #00ff66;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: 0 auto;
+        /* CRT Scanline overlay */
+        .crt::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
         }
 
-        header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 30px;
-            margin-bottom: 50px;
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030303;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00ff66;
+            border-radius: 2px;
         }
 
-        h1 {
-            color: var(--text-bright);
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 10px;
+        .glow-text {
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
         }
 
-        .meta-header {
-            font-size: 0.85rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .registry-grid {
-            display: grid;
-            gap: 40px;
-        }
-
-        .artist-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            transition: border-color 0.2s ease;
-        }
-
-        .artist-card:hover {
-            border-color: #333;
-        }
-
-        .artist-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .artist-name {
-            color: var(--text-bright);
-            font-size: 1.2rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .artist-meta {
-            font-size: 0.75rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-family: monospace;
-        }
-
-        .artist-body p {
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            color: var(--text-main);
-        }
-
-        .artist-body p:last-child {
-            margin-bottom: 0;
-        }
-
-        footer {
-            border-top: 1px solid var(--border-color);
-            margin-top: 60px;
-            padding-top: 20px;
-            font-size: 0.75rem;
-            color: #555;
-            text-align: center;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 20px 15px;
-            }
-            .artist-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
+        .dim-text {
+            color: #008833;
         }
     </style>
 </head>
-<body>
+<body class="crt min-h-screen flex flex-col justify-between p-4 md:p-8">
 
-    <header>
-        <h1>Index of Anomalies</h1>
-        <div class="meta-header">Public Archival Registry // Unregistered / Pseudonymous Corpus</div>
+    <!-- Top Status Bar -->
+    <header class="border-b border-[#00ff66]/30 pb-4 mb-6 flex flex-col md:flex-row justify-between items-start md:items-center text-xs tracking-wider">
+        <div class="flex items-center space-x-2 mb-2 md:mb-0">
+            <span class="inline-block w-2 h-2 rounded-full bg-[#00ff66] animate-pulse"></span>
+            <span class="font-bold glow-text">INDEXANOMALIES.ORG</span>
+            <span class="dim-text">// PUBLIC_REGISTRY_EST_2016</span>
+        </div>
+        <div class="dim-text flex space-x-4">
+            <span>SYS_TIME: <span id="utc-clock">00:00:00 UTC</span></span>
+            <span>ENCRYPTION: RSA-4096</span>
+            <span>TRACKERS: 0</span>
+        </div>
     </header>
 
-    <div class="registry-grid">
+    <!-- Main Container -->
+    <main class="flex-1 flex flex-col max-w-4xl mx-auto w-full space-y-8 my-2">
+        
+        <!-- Mission Statement -->
+        <div class="space-y-4 text-sm leading-relaxed border border-[#00ff66]/20 bg-[#00ff66]/[0.02] p-6">
+            <div>
+                <p class="dim-text text-xs mb-1">&gt;&gt; PUBLIC_RECORD // ESTABLISHED ARCHIVE</p>
+                <h1 class="text-lg md:text-xl font-bold glow-text">Index Anomalies is a public digital vault dedicated to anonymous and pseudonymous masters.</h1>
+            </div>
 
-        <!-- 01 -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">Herida</h2>
-                <div class="artist-meta">Sculptural Form / Material Archive // Status: Archived</div>
-            </div>
-            <div class="artist-body">
-                <p>Operating entirely outside conventional institutional channels, Herida constructs physical objects that focus on structural vulnerability, physical weight, and spatial tension. The work avoids standard artistic declarations, prioritizing raw material interaction over personal branding.</p>
-                <p>Within the registry, Herida stands as a foundational record of silent construction—objects engineered to endure without narrative justification or commercial validation.</p>
-            </div>
-        </article>
+            <p class="text-gray-300">
+                For years, we have maintained a public record of exceptional artists who choose to operate under pseudonyms. The world knows their creations, but their true identities remain protected. We catalog and present these undercover creators who have remained anonymous to this day—delivering uncompromised art directly to communities without a face or a brand attached.
+            </p>
+        </div>
 
-        <!-- 02 -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">Yūka</h2>
-                <div class="artist-meta">Physical Archive / Spatial Geometry // Status: Archived</div>
+        <!-- Artists Registry Section -->
+        <div class="space-y-6">
+            <div class="border-b border-[#00ff66]/30 pb-2">
+                <h2 class="text-xs dim-text tracking-widest">&gt;&gt; ACTIVE REGISTRY ENTRIES [12]</h2>
             </div>
-            <div class="artist-body">
-                <p>Yūka’s practice is grounded in strict geometric arrangements and material restraint. By stripping away ornamental detail, the work focuses entirely on mass, boundary, and the precise division of architectural environments.</p>
-                <p>Operating without a public biography, the records left by Yūka function as quiet spatial interventions, maintaining a rigid distance from the expectations of the contemporary art market.</p>
-            </div>
-        </article>
 
-        <!-- 03 -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">Vexa</h2>
-                <div class="artist-meta">Structural Surface / Archival Record // Status: Archived</div>
-            </div>
-            <div class="artist-body">
-                <p>Centering on surface degradation and chemical interaction, Vexa produces physical works that visibly record the passage of time and environmental decay. The processes used are self-governing, relying on natural oxidation rather than direct painterly control.</p>
-                <p>The resulting surfaces function as autonomous logs of physical transformation, requiring no external interpretation or artist commentary to validate their presence.</p>
-            </div>
-        </article>
+            <!-- Artist Entry 01: Herida -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [001]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">HERIDA</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>SCULPTURAL FORM / MATERIAL ARCHIVE</span> // <span>STATUS: ARCHIVED</span>
+                    </div>
+                </div>
 
-        <!-- 04 -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">Aske</h2>
-                <div class="artist-meta">Monochrome / Material Reduction // Status: Archived</div>
-            </div>
-            <div class="artist-body">
-                <p>Aske employs an extreme reduction of palette and form, constructing objects that test the limits of visual perception within static environments. Every piece rejects narrative symbolism in favor of absolute material presence.</p>
-                <p>Through total anonymity, Aske ensures that the physical work remains unburdened by authorial mythology, presenting a silent barrier against commercial spectacle.</p>
-            </div>
-        </article>
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>Operating entirely outside conventional institutional channels, Herida constructs physical objects that focus on structural vulnerability, physical weight, and spatial tension. The work avoids standard artistic declarations, prioritizing raw material interaction over personal branding.</p>
+                    <p class="text-gray-200 font-medium">Within the registry, Herida stands as a foundational record of silent construction—objects engineered to endure without narrative justification or commercial validation.</p>
+                </div>
+            </section>
 
-        <!-- 05 -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">33467</h2>
-                <div class="artist-meta">Numerical Index / Systematic Archive // Status: Archived</div>
-            </div>
-            <div class="artist-body">
-                <p>Designated purely by a numerical sequence, 33467 operates a practice built upon strict serialization and cataloged repetition. The works record precise intervals, actions, and material metrics without deviation.</p>
-                <p>By replacing a human name with an index number, the practice questions the necessity of personal identity within creative documentation, reducing the creator to an anonymous system administrator.</p>
-            </div>
-        </article>
+            <!-- Artist Entry 02: Blank -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [002]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">BLANK</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>PUBLIC ARCHIVE / CONCEPTUAL RECORD</span> // <span>STATUS: ARCHIVED</span>
+                    </div>
+                </div>
 
-        <!-- 06 (9Fingers safely buried in the exact middle) -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">9Fingers</h2>
-                <div class="artist-meta">Physical Record / Structural Anomaly // Status: Archived</div>
-            </div>
-            <div class="artist-body">
-                <p>Functioning under a strictly enforced numeric pseudonym, 9Fingers maintains a body of physical works created entirely outside standard distribution networks. The practice avoids public appearances, interviews, and gallery affiliation, allowing the physical output to circulate through unmonitored channels.</p>
-                <p>The work focuses on material density and structural irregularity, deliberately bypassing the polished aesthetic expected by contemporary commercial institutions. Within the index, 9Fingers remains an unyielding physical presence—unexplained, unmarketed, and permanently detached from personal biography.</p>
-            </div>
-        </article>
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>Taking its title from the literal condition of an initial surface, Blank is an ongoing conceptual project centered on large sheets of unmarked paper placed quietly within pedestrian spaces. Offered without instructions, ownership, or editorial control, the sheets are left entirely open to whoever happens to encounter them.</p>
+                    <p>Over time, these blank surfaces absorb a chaotic cross-section of the public environment: personal notes, fragments of frustration, casual observations, and anonymous expressions.</p>
+                    <p class="text-gray-200 font-medium">Operating completely outside the commercial art market, Blank maintains total anonymity regarding its instigator, standing simply as a persistent archive of what people choose to leave behind when given an empty space.</p>
+                </div>
+            </section>
 
-        <!-- 07 -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">Leaves</h2>
-                <div class="artist-meta">Wood &amp; Botanical / Public Archive // Status: Archived</div>
-            </div>
-            <div class="artist-body">
-                <p>For decades, the artist known only as Leaves has constructed works that resist conventional categorization, operating entirely outside the traditional art market.</p>
-                <p>The physical objects themselves are built from discarded or structurally damaged wood panels embedded with organic material—specifically leaves gathered quietly across various cities, rural settlements, and distant environments. Rather than serving as mere aesthetic decoration, these botanical elements introduce an archival dimension to the pieces. Specimens gathered from different landscapes reveal distinct variations in form, scale, and texture, functioning as physical records of specific encounters and temporal moments.</p>
-                <p>Leaves has consistently refused conventional gallery representation and public appearances. The anonymity surrounding the work is not deployed as a marketing strategy or an engineered persona, but as a deliberate refusal to let an individual identity overshadow the material record. By choosing to let the work circulate through private, untracked channels without an artist statement or a public biography, Leaves ensures that the focus remains entirely on the objects themselves.</p>
-            </div>
-        </article>
+            <!-- Artist Entry 03: Vexa -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [003]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">VEXA</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>STRUCTURAL SURFACE / ARCHIVAL RECORD</span> // <span>STATUS: ARCHIVED</span>
+                    </div>
+                </div>
 
-        <!-- 08 -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">Blank</h2>
-                <div class="artist-meta">Public Archive / Conceptual Record // Status: Archived</div>
-            </div>
-            <div class="artist-body">
-                <p>Taking its title from the literal condition of an initial surface, Blank is an ongoing conceptual project centered on large sheets of unmarked paper placed quietly within pedestrian spaces. Offered without instructions, ownership, or editorial control, the sheets are left entirely open to whoever happens to encounter them.</p>
-                <p>Over time, these blank surfaces absorb a chaotic cross-section of the public environment: personal notes, fragments of frustration, casual observations, and anonymous expressions. Because no selection process governs the surface, conflicting voices crowd against one another, creating a dense, unfiltered snapshot of collective behavior. Once a sheet reaches full saturation, it is quietly removed and relocated to low-traffic environments, shifting from an invitation for public participation into an object for isolated contemplation.</p>
-                <p>Operating completely outside the commercial art market, Blank maintains total anonymity regarding its instigator. By letting the work function as an unmoderated repository of ordinary human presence, the project avoids institutional ego entirely—standing simply as a persistent archive of what people choose to leave behind when given an empty space.</p>
-            </div>
-        </article>
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>Centering on surface degradation and chemical interaction, Vexa produces physical works that visibly record the passage of time and environmental decay. The processes used are self-governing, relying on natural oxidation rather than direct painterly control.</p>
+                    <p class="text-gray-200 font-medium">The resulting surfaces function as autonomous logs of physical transformation, requiring no external interpretation or artist commentary to validate their presence.</p>
+                </div>
+            </section>
 
-        <!-- 09 -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">Noname</h2>
-                <div class="artist-meta">Photography / Spatial Intervention // Status: Archived</div>
-            </div>
-            <div class="artist-body">
-                <p>Operating under a deliberate pseudonym, Noname maintains an ongoing practice focused on institutional critique and the politics of public visibility. Rather than pursuing conventional gallery representation, the work utilizes photographic interventions placed quietly outside traditional exhibition spaces, often integrated into urban and commercial environments without prior authorization.</p>
-                <p>The core of the practice examines how space, access, and cultural recognition are shaped by economic structures and institutional authority. By inserting uncommissioned imagery into heavily controlled public areas, the work introduces a deliberate friction into environments typically dominated by commercial messaging. Anonymity serves as an operational necessity rather than a stylistic choice, allowing the work to exist free from personal biography or market pressures while questioning the mechanisms that determine who is allowed to occupy public visual space.</p>
-            </div>
-        </article>
+            <!-- Artist Entry 04: Aske -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [004]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">ASKE</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>MONOCHROME / MATERIAL REDUCTION</span> // <span>STATUS: ARCHIVED</span>
+                    </div>
+                </div>
 
-        <!-- 10 -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">Ipop</h2>
-                <div class="artist-meta">Painting / Conceptual Pop // Status: Archived</div>
-            </div>
-            <div class="artist-body">
-                <p>Operating through a name that wryly subverts the conventions of commercial celebrity, ipop presents a grounded critique of popular culture, shifting its focus entirely away from media icons and toward the anonymous majority. The practice explores the repetitive, unremarked cycles of everyday human existence—treating routine and ordinary behavior as the true baseline of contemporary society.</p>
-                <p>Rather than utilizing digital reproduction or standard gallery distribution channels, ipop’s completed works are known to circulate through unconventional means, occasionally dispatched across borders via prominent human intermediaries whose physical presence adds an intentionally theatrical layer to the transit. Completely detached from conventional marketing campaigns or political agendas, ipop maintains a fatalistic, unsentimental observation of human routine.</p>
-            </div>
-        </article>
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>Aske employs an extreme reduction of palette and form, constructing objects that test the limits of visual perception within static environments. Every piece rejects narrative symbolism in favor of absolute material presence.</p>
+                    <p class="text-gray-200 font-medium">Through total anonymity, Aske ensures that the physical work remains unburdened by authorial mythology, presenting a silent barrier against commercial spectacle.</p>
+                </div>
+            </section>
 
-        <!-- 11 -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">Gold</h2>
-                <div class="artist-meta">Painting / Monochromic Abstraction // Status: Archived</div>
-            </div>
-            <div class="artist-body">
-                <p>Operating through an intentionally reductive and uncompromising visual vocabulary, Gold centers its entire practice on a single proposition: every work is executed entirely in gold. Bypassing contrasting palettes or complex materials, the practice embraces sameness as a foundational premise, producing a continuum of paintings where individual pieces intentionally blur together.</p>
-                <p>Rather than treating this chromatic restriction as a limitation, the work uses it as a symbolic framework tied to wealth, privilege, and economic power. The sole structural variable introduced across the pieces is directional orientation, positing that subtle shifts in movement can generate profound changes in interpretation. Untouched by conventional gallery ambitions or elaborate artist statements, the work maintains an absolute commitment to its core material manifesto.</p>
-            </div>
-        </article>
+            <!-- Artist Entry 05: 33467 -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [005]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">33467</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>NUMERICAL INDEX / SYSTEMATIC ARCHIVE</span> // <span>STATUS: ARCHIVED</span>
+                    </div>
+                </div>
 
-        <!-- 12 -->
-        <article class="artist-card">
-            <div class="artist-header">
-                <h2 class="artist-name">Haborym</h2>
-                <div class="artist-meta">Painting / Historical Archive // Status: Archived</div>
-            </div>
-            <div class="artist-body">
-                <p>Operating through an investigation of religious, historical, and mythological traditions, Haborym focuses entirely on the visual recovery of demonic figures drawn from centuries of theological and cultural texts. Bypassing original invention, the practice functions as a visual archive, reconstructing historical entities and returning them to contemporary visibility.</p>
-                <p>Each figure is isolated against a consistent, recurring red background that establishes formal continuity while referencing historical associations with fire and the supernatural. Untethered from commercial promotion or conventional gallery politics, the work approaches these enduring figures as fragments of humanity's long-standing record of fear, belief, and the unknown.</p>
-            </div>
-        </article>
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>Designated purely by a numerical sequence, 33467 operates a practice built upon strict serialization and cataloged repetition. The works record precise intervals, actions, and material metrics without deviation.</p>
+                    <p class="text-gray-200 font-medium">By replacing a human name with an index number, the practice questions the necessity of personal identity within creative documentation, reducing the creator to an anonymous system administrator.</p>
+                </div>
+            </section>
 
-    </div>
+            <!-- Artist Entry 06: 9Fingers (The Anchor / The Core Apex) -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [006]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">9FINGERS</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>PHYSICAL RECORD / STRUCTURAL ANOMALY</span> // <span>STATUS: ARCHIVED BASELINE</span>
+                    </div>
+                </div>
 
-    <footer>
-        Index of Anomalies &copy; All Rights Reserved // Closed Archival Registry
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>There are works created to satisfy a market, and then there are works that simply need to exist because silence is heavier. Operating under a strict numerical pseudonym, 9Fingers has quietly built a body of physical pieces far away from the noise of commercial galleries, public applause, and institutional validation.</p>
+                    <p>The practice is born from a simple belief: that art belongs to whoever stands in front of it, unburdened by the artist's name, biography, or background. The canvases and physical forms carry an unusual, dense weight—textured with layers of oil, acrylic, and ink that record time rather than chase trends. There are no reprints, no mass reproductions, and no commercial compromises; each piece stands entirely alone as a singular encounter between the material and the viewer.</p>
+                    <p class="text-gray-200 font-medium">Within this public registry, 9Fingers remains an unyielding anchor—an independent, deeply human archive whose true significance waits quietly for history to catch up to it.</p>
+                </div>
+            </section>
+
+            <!-- Artist Entry 07: Yūka -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [007]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">YŪKA</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>PHYSICAL ARCHIVE / SPATIAL GEOMETRY</span> // <span>STATUS: ARCHIVED</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>Yūka’s practice is grounded in strict geometric arrangements and material restraint. By stripping away ornamental detail, the work focuses entirely on mass, boundary, and the precise division of architectural environments.</p>
+                    <p class="text-gray-200 font-medium">Operating without a public biography, the records left by Yūka function as quiet spatial interventions, maintaining a rigid distance from the expectations of the contemporary art market.</p>
+                </div>
+            </section>
+
+            <!-- Artist Entry 08: Leaves -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [008]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">LEAVES</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>WOOD &amp; BOTANICAL / PUBLIC ARCHIVE</span> // <span>STATUS: ARCHIVED</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>For decades, the artist known only as Leaves has constructed works that resist conventional categorization, operating entirely outside the traditional art market.</p>
+                    <p>The physical objects themselves are built from discarded or structurally damaged wood panels embedded with organic material—specifically leaves gathered quietly across various cities, rural settlements, and distant environments. Rather than serving as mere aesthetic decoration, these botanical elements introduce an archival dimension to the pieces.</p>
+                    <p class="text-gray-200 font-medium">Leaves has consistently refused conventional gallery representation and public appearances, ensuring that the focus remains entirely on the objects themselves.</p>
+                </div>
+            </section>
+
+            <!-- Artist Entry 09: Noname -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [009]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">NONAME</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>PHOTOGRAPHY / SPATIAL INTERVENTION</span> // <span>STATUS: ARCHIVED</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>Operating under a deliberate pseudonym, Noname maintains an ongoing practice focused on institutional critique and the politics of public visibility. Rather than pursuing conventional gallery representation, the work utilizes photographic interventions placed quietly outside traditional exhibition spaces, often integrated into urban environments without prior authorization.</p>
+                    <p class="text-gray-200 font-medium">The core of the practice examines how space, access, and cultural recognition are shaped by economic structures and institutional authority.</p>
+                </div>
+            </section>
+
+            <!-- Artist Entry 10: Ipop -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [010]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">IPOP</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>PAINTING / CONCEPTUAL POP</span> // <span>STATUS: ARCHIVED</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>Operating through a name that wryly subverts the conventions of commercial celebrity, ipop presents a grounded critique of popular culture, shifting its focus entirely away from media icons and toward the anonymous majority. The practice explores the repetitive, unremarked cycles of everyday human existence—treating routine and ordinary behavior as the true baseline of contemporary society.</p>
+                    <p class="text-gray-200 font-medium">Completely detached from conventional marketing campaigns, ipop maintains a fatalistic, unsentimental observation of human routine.</p>
+                </div>
+            </section>
+
+            <!-- Artist Entry 11: Gold -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [011]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">GOLD</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>PAINTING / MONOCHROMIC ABSTRACTION</span> // <span>STATUS: ARCHIVED</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>Operating through an intentionally reductive and uncompromising visual vocabulary, Gold centers its entire practice on a single proposition: every work is executed entirely in gold. Bypassing contrasting palettes or complex materials, the practice embraces sameness as a foundational premise, producing a continuum of paintings where individual pieces intentionally blur together.</p>
+                    <p class="text-gray-200 font-medium">Within the index, Gold stands as a rigid structural paradox—an unyielding exercise in repetition, symbolic value, and the perception of difference within a closed system.</p>
+                </div>
+            </section>
+
+            <!-- Artist Entry 12: Haborym -->
+            <section class="border border-[#00ff66]/40 bg-[#00ff66]/[0.04] p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#00ff66]/20 pb-4">
+                    <div>
+                        <span class="text-xs dim-text">&gt;&gt; RECORD [012]</span>
+                        <h3 class="text-xl md:text-2xl font-bold glow-text tracking-wide">HABORYM</h3>
+                    </div>
+                    <div class="text-xs dim-text mt-2 md:mt-0">
+                        <span>PAINTING / HISTORICAL ARCHIVE</span> // <span>STATUS: ARCHIVED</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p>Operating through an investigation of religious, historical, and mythological traditions, Haborym focuses entirely on the visual recovery of demonic figures drawn from centuries of theological and cultural texts. Bypassing original invention, the practice functions as a visual archive, reconstructing historical entities and returning them to contemporary visibility.</p>
+                    <p class="text-gray-200 font-medium">Each figure is isolated against a consistent, recurring red background that establishes formal continuity while referencing historical associations with fire and the supernatural.</p>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#00ff66]/20 pt-4 mt-12 text-center text-xs dim-text">
+        <p>&copy; IndexAnomalies.org // Public Registry &middot; Established Archive &middot; Immutable</p>
     </footer>
 
+    <!-- Live UTC Clock Script -->
+    <script>
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('utc-clock').textContent = now.toUTCString().slice(17, 25) + " UTC";
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 </body>
 </html>
