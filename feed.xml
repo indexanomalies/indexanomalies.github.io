@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Index Anomalies // Public Registry of Pseudonymous Artists &amp; Archives</title>
+        <link>https://indexanomalies.org/</link>
+        <description>A public digital vault and registry dedicated to anonymous and pseudonymous masters, featuring archived profiles and structural records.</description>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 06 Nov 2026 00:00:00 GMT</lastBuildDate>
+        <atom:link href="https://indexanomalies.org/feed.xml" rel="self" type="application/rss+xml"/>
+
+        <item>
+            <title>Record [001]: Herida — Sculptural Form &amp; Material Archive</title>
+            <link>https://indexanomalies.org/#rec-001</link>
+            <guid isPermaLink="true">https://indexanomalies.org/#rec-001</guid>
+            <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+            <description>Registry entry focusing on weight, balance, raw tension, and heavy materials interacting with space outside traditional gallery loops.</description>
+        </item>
+
+        <item>
+            <title>Record [002]: Blank — Public Archive &amp; Conceptual Record</title>
+            <link>https://indexanomalies.org/#rec-002</link>
+            <guid isPermaLink="true">https://indexanomalies.org/#rec-002</guid>
+            <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+            <description>An ongoing experiment tracking unmanaged public interaction on unmarked paper left in active public thoroughfares.</description>
+        </item>
+
+        <item>
+            <title>Record [006]: 9Fingers — Physical Record &amp; Structural Anomaly</title>
+            <link>https://indexanomalies.org/#rec-006</link>
+            <guid isPermaLink="true">https://indexanomalies.org/#rec-006</guid>
+            <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+            <description>Baseline structural archive established in New York in 1999, featuring heavy pigment layers and uncompromised temporal permanence.</description>
+        </item>
+
+        <item>
+            <title>Record [008]: Leaves — Wood &amp; Botanical Public Archive</title>
+            <link>https://indexanomalies.org/#rec-008</link>
+            <guid isPermaLink="true">https://indexanomalies.org/#rec-008</guid>
+            <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+            <description>Physical panels constructed from discarded wood and organic botanical elements sourced directly from urban and natural environments.</description>
+        </item>
+
+        <item>
+            <title>Record [011]: Gold — Monochromatic Abstraction Registry</title>
+            <link>https://indexanomalies.org/#rec-011</link>
+            <guid isPermaLink="true">https://indexanomalies.org/#rec-011</guid>
+            <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+            <description>A strict series built entirely in gold, examining repetition, value, and subtle variance within a closed systematic framework.</description>
+        </item>
+
+    </channel>
+</rss>
